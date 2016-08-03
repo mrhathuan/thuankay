@@ -30,7 +30,8 @@ namespace Shop_Nhi
                       "~/Scripts/sequence-theme.modern-slide-in.js",
                       "~/Scripts/nouislider.js",
                       "~/Scripts/slick.js",
-                      "~/Scripts/custom.js"));
+                      "~/Scripts/custom.js",
+                      "~/Scripts/toastr.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -40,7 +41,8 @@ namespace Shop_Nhi
                         "~/Content/nouislider.css",
                          "~/Content/sequence-theme.modern-slide-in.css",
                         "~/Content/eagle.gallery.css",
-                        "~/Content/style.css"
+                        "~/Content/style.css",
+                        "~/Content/toastr.css"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/JsAdmin").Include(

@@ -658,6 +658,7 @@
     <Content Include="Content\theme-color\purple-theme.css" />
     <Content Include="Content\theme-color\red-theme.css" />
     <Content Include="Content\theme-color\yellow-theme.css" />
+    <Content Include="Content\toastr.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\css\font-awesome.css" />
     <Content Include="fonts\css\font-awesome.min.css" />
@@ -2071,6 +2072,7 @@
     <Content Include="Scripts\sequence-theme.modern-slide-in.js" />
     <Content Include="Scripts\sequence.js" />
     <Content Include="Scripts\slick.js" />
+    <Content Include="Scripts\toastr.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

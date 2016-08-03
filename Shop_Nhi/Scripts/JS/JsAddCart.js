@@ -1,4 +1,9 @@
 ﻿//Set like
+
+toastr.options = {
+    "closeButton": true
+};
+
 $(document).ready(function () {
     $('.like').off('click').on('click', function (e) {
         e.preventDefault();
@@ -38,18 +43,19 @@ $(document).ready(function () {
                 $('.aa-product-view-content h3').html(''+data.productName);
                 $('.aa-product-view-price').html('' + addPeriod(data.price) + '<sup><u>đ</u></sup>');
                 $('.aa-prod-category').html('Danh mục:' + ' ' + '<a href="#">' + res.category + '</a>');
-                if (data.quantity > 0) {
-                    $('.aa-prod-view-bottom').empty().append(' <a href="#" data-id="' + data.ID + '" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>' +
-                    '<a href="/chi-tiet/' + data.metatTitle + '-' + data.ID + '" class="aa-add-to-cart-btn">Xem chi tiết</a>');
-                } else {
-                    $('.aa-prod-view-bottom').empty().append('<a href="/chi-tiet/' + data.metatTitle + '-' + data.ID + '" class="aa-add-to-cart-btn">Xem chi tiết</a>');
-                }
+                if (data.quantity == null) {
+                    $('.aa-prod-view-bottom').remove('#add-cart-modal');
+                } 
+                $('.aa-prod-view-bottom').append('<a href="/chi-tiet/' + data.metatTitle + '-' + data.ID + '" class="aa-add-to-cart-btn">Xem chi tiết</a>');
             }
         })
     })
 });
 //Add cart
 $(document).ready(function () {
+    toastr.options = {
+        "closeButton": true
+    };
     $('.aa-add-card-btn').off('click').on('click', function (e) {
         e.preventDefault();
         var btn = $(this);     
@@ -84,6 +90,7 @@ $(document).ready(function () {
                 $('.aa-cartbox-total-price').empty().append(addPeriod(res.tongtien));
                 $(btn).empty().append('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>');
                 $(btn_id).empty().append('<a class="aa-add-card-btn-ok" href="/gio-hang"><span class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></span>Vào giỏ hàng</a>');
+                toastr.success('Thêm sản phẩm vào giỏ thành công', '');
             },
             error: function (errormessage) {
                 alert(errormessage.responseText);
@@ -138,6 +145,7 @@ $(document).ready(function () {
                                ' </li>');
                 $('.aa-cart-notify').html(res.soluong);
                 $('.aa-cartbox-total-price').empty().append(addPeriod(res.tongtien));
+                toastr.success('Thêm sản phẩm vào giỏ thành công', '');
             },
             error: function () {
                 alert(errormessage.responseText);
@@ -149,9 +157,9 @@ $(document).ready(function () {
 
 //Addcart popup
 $(document).ready(function () {
-    $('.aa-add-to-cart-btn').click(function (e) {
+    $('#add-cart-modal').off('click').on('click', function (e) {
         e.preventDefault();
-        var id = $(this).data('id');
+        var id = $('#hidProductId').val();
         var qty = $('#quantity').val();
         $.ajax({
             url: '/Cart/AddCartItem',
@@ -160,14 +168,14 @@ $(document).ready(function () {
             dataType: 'JSON',
             success: function (res) {
                 if (res.productItem != null) {
-                    window.location.href('/');
+                    toastr.success('Thêm sản phẩm vào giỏ thành công', '');
+                    location.href = '/';
                 }
             },
             error: function () {
                 alert(errormessage.responseText);
             }
         })
-    });
-    return false;
+    });   
 });
 
