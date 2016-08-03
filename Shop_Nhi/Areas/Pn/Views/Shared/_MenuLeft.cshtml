@@ -1,0 +1,151 @@
+﻿
+<div class="navbar nav_title" style="border: 0;">
+    <a href="/" class="site_title"><i class="fa fa-home"></i> <span>Shop Nhi!</span></a>
+</div>
+<div class="clearfix"></div>
+
+<!-- menu prile quick info -->
+<div class="profile">
+    <div class="profile_pic">
+        <img src="~/img/admin/avata.png" alt="..." class="img-circle profile_img">
+    </div>
+    <div class="profile_info">
+        <span>Welcome,</span>
+        <h2>@Session["username"]</h2>
+    </div>
+</div>
+<!-- /menu prile quick info -->
+
+<br />
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+    <div class="menu_section">
+        <h3>Admin !</h3>
+       
+        <ul class="nav side-menu">
+            <li>
+                <a><i class="fa fa-home"></i> Trang chủ <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Thuankay")">Admin</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-edit"></i> Quản Lý <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        @Html.ActionLink("Quản lý sản phẩm", "Index", "Product")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Quản lý danh mục","Index","Category")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Quản lý đơn hàng", "Index", "Order")
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-desktop"></i> Quản lý giao diện <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        @Html.ActionLink("Logo", "Index", "Logo")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Slide", "Index", "Slide")
+                    </li>                  
+                    <li>
+                        @Html.ActionLink("Hộp Liên hệ", "Index", "BoxAbout")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Trang giới thiệu", "Index", "Abouts")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Trang hướng dẫn mua hàng", "Index", "HelpBuys")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Trang liên hệ", "Index", "Contacts")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Trang thanh toán", "Index", "Payment")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Bản đồ", "Index", "Maps")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Thông báo", "Index", "Notifications")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Dưới website", "Index", "Footer")
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-user"></i> Tài khoản <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="@Url.Action("Index","Users")">Danh sách</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create","Users")">Thêm mới</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-bar-chart-o"></i> Báo cáo, thống kê <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li>
+                        <a href="#">ABC</a>
+                    </li>
+                    <li>
+                        <a href="#">ABC</a>
+                    </li>
+                    <li>
+                        <a href="#">ABC</a>
+                    </li>
+
+                        <li>
+                            <a href="#">ABC </a>
+                        </li>
+                    <li>
+                        <a href="#">ABC </a>
+                    </li>
+                </ul>
+            </li>         
+        </ul>
+       
+            <ul class="nav side-menu">
+                <li>
+                    <a><i class="fa fa-home"></i> Trang chủ <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Thuankay")">Admin</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-edit"></i> Quản Lý <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none">
+                        <li>
+                            @Html.ActionLink("Quản lý sản phẩm", "Index", "Product")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Quản lý danh mục", "Index", "Category")
+                        </li>
+                        <li>
+                            <a href="#">Quản lý hóa đơn</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+         
+</div>
+</div>
+<!-- /sidebar menu -->

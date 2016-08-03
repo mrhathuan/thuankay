@@ -1,0 +1,317 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Shop_Nhi.Models.Framework.Product> ListNew = (List<Shop_Nhi.Models.Framework.Product>)ViewBag.ListNew;
+    List<Shop_Nhi.Models.Framework.Product> ListSale = (List<Shop_Nhi.Models.Framework.Product>)ViewBag.ListSale;
+    List<Shop_Nhi.Models.Framework.Product> ListHot = (List<Shop_Nhi.Models.Framework.Product>)ViewBag.Hot;
+    List<Shop_Nhi.Models.Framework.Product> ListFalse = (List<Shop_Nhi.Models.Framework.Product>)ViewBag.ListByStatusFalse;
+}
+
+
+@section JsFooter{
+<script src="~/Scripts/JS/JsAddCart.js"></script>
+}
+
+@{Html.RenderAction("_Slide", "Home");}
+
+<!-- Products section -->
+<section id="aa-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="aa-product-area">
+                        <div class="aa-product-inner">
+                            <!-- start prduct navigation -->
+                            <ul class="nav nav-tabs aa-products-tab">
+                                <li class="active"><a href="#men" data-toggle="tab">Hàng bán chạy</a></li>
+                                <li><a href="#women" data-toggle="tab">On Sale</a></li>
+                                <li><a href="#sports" data-toggle="tab">Sản phẩm mới</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <!-- Start hot product category -->
+                                <div class="tab-pane fade in active" id="men">
+                                    <ul class="aa-product-catg">
+                                        <!-- start single product item -->
+                                        @foreach (var item in ListHot) {
+
+                                            <li>
+                                                <figure>
+                                                    <a class="aa-product-img" href="/chi-tiet/@item.metatTitle-@item.ID"><img src="@item.image" alt="@item.productName"></a>
+                                                    @if (item.quantity > 0)
+                                                        {
+                                                        <div class="btn-product_@item.ID">
+                                                            <a class="aa-add-card-btn" data-loading-text="Loading..." role="button" href="#" data-id="@item.ID"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                        </div>
+                                                        }
+                                                    <figcaption>
+                                                        <div class="aa-product-title"><a title="@item.productName" href="/chi-tiet/@item.metatTitle-@item.ID">@item.productName</a></div>
+                                                        <span class="aa-product-price">@string.Format("{0:0,0}", item.price)<sup><u>đ</u></sup></span><span class="aa-product-price"><del>@string.Format("{0:0,0}", item.promotionPrice)</del></span>
+                                                    </figcaption>
+                                                </figure> 
+                                                <div class="aa-product-hvr-content" id="aa-product-hvr-content_@item.ID">
+                                                    <a href="#" class="like" id="like_@item.ID" data-id="@item.ID" data-toggle="tooltip" data-placement="top" title="Yêu thích"><span class="fa fa-heart-o"></span></a>
+                                                    <a href="/chi-tiet/@item.metatTitle-@item.ID" data-toggle="tooltip" data-placement="top" title="Chi tiết"><span class="fa fa-exchange"></span></a>
+                                                    <a href="#" class="quick-view" data-id="@item.ID" data-toggle2="tooltip" data-placement="top" title="Xem nhanh" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                                                </div>
+                                                <!-- product badge -->
+                                                @if (item.quantity == null)
+                                            {
+                                                    <span class="aa-badge aa-sold-out" href="#">Hết hàng!</span>
+                                            }
+                                            </li>
+                                        }
+                                    </ul>
+                                    <a class="aa-browse-btn" href="#">Xem tất cả <span class="fa fa-long-arrow-right"></span></a>
+                                </div>
+                                <!-- / hot product category -->
+                                <!-- start sale product category -->
+                                <div class="tab-pane fade" id="women">
+                                    <ul class="aa-product-catg">
+                                        @foreach (var item in ListSale) {
+                                        <li>
+                                            <figure>
+                                                <a class="aa-product-img" href="/chi-tiet/@item.metatTitle-@item.ID"><img src="@item.image" alt="@item.productName"></a>
+                                                @if (item.quantity > 0)
+                                                {
+                                                    <div class="btn-product_@item.ID">
+                                                            <a class="aa-add-card-btn" data-loading-text="Loading..." role="button" href="#" data-id="@item.ID"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                     </div>
+                                                }
+                                                <figcaption>
+                                                    <div class="aa-product-title"><a title="@item.productName" href="#">@item.productName</a></div>
+                                                    <span class="aa-product-price">@string.Format("{0:0,0}", item.price)<sup><u>đ</u></sup></span><span class="aa-product-price"><del>@string.Format("{0:0,0}", item.promotionPrice)</del></span>
+                                                </figcaption>
+                                            </figure>
+                                            <div class="aa-product-hvr-content" id="aa-product-hvr-content_@item.ID">
+                                                <a href="#" class="like" id="like_@item.ID" data-id="@item.ID" data-toggle="tooltip" data-placement="top" title="Yêu thích"><span class="fa fa-heart-o"></span></a>
+                                                <a href="/chi-tiet/@item.metatTitle-@item.ID" data-toggle="tooltip" data-placement="top" title="Chi tiết"><span class="fa fa-exchange"></span></a>
+                                                <a href="#" class="quick-view" data-id="@item.ID" data-toggle2="tooltip" data-placement="top" title="Xem nhanh" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                                            </div>
+                                            <!-- product badge -->
+                                            @if (item.quantity == null)
+                                            {
+                                                <span class="aa-badge aa-sold-out" href="#">Hết hàng!</span>
+                                            }
+                                        </li>
+                                        }
+                                </ul>
+
+                                     <a class="aa-browse-btn" href="#">Xem tất cả <span class="fa fa-long-arrow-right"></span></a>
+                                </div>
+                                <!-- / sale product category -->
+                                <!-- start new product category -->
+                                            <div class="tab-pane fade" id="sports">
+                                                <ul class="aa-product-catg">
+                                                    <!-- start single product item -->
+                                                    @foreach (var item in ListNew)
+                                                    {
+
+                                                        <li>
+                                                            <figure>
+                                                                <a class="aa-product-img" href="/chi-tiet/@item.metatTitle-@item.ID"><img src="@item.image" alt="@item.productName"></a>
+                                                                @if (item.quantity > 0)
+                                                                    {
+                                                                         <div class="btn-product_@item.ID">
+                                                                            <a class="aa-add-card-btn" data-loading-text="Loading..." role="button" href="#" data-id="@item.ID"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                                        </div>
+                                                                                    }
+                                                                <figcaption>
+                                                                    <div class="aa-product-title"><a title="@item.productName" href="#">@item.productName</a></div>
+                                                                    <span class="aa-product-price">@string.Format("{0:0,0}", item.price)<sup><u>đ</u></sup></span><span class="aa-product-price"><del>@string.Format("{0:0,0}", item.promotionPrice)</del></span>
+                                                                </figcaption>
+                                                            </figure>
+                                                            <div class="aa-product-hvr-content" id="aa-product-hvr-content_@item.ID">
+                                                                <a href="#" class="like" id="like_@item.ID" data-id="@item.ID" data-toggle="tooltip" data-placement="top" title="Yêu thích"><span class="fa fa-heart-o"></span></a>
+                                                                <a href="/chi-tiet/@item.metatTitle-@item.ID" data-toggle="tooltip" data-placement="top" title="Chi tiết"><span class="fa fa-exchange"></span></a>
+                                                                <a href="#" class="quick-view" data-id="@item.ID" data-toggle2="tooltip" data-placement="top" title="Xem nhanh" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                                                            </div>
+                                                            <!-- product badge -->
+                                                            @if (item.quantity == null)
+                                                            {
+                                                                <span class="aa-badge aa-sold-out" href="#">Hết hàng!</span>
+                                                            }
+                                                        </li>
+                                                    }
+                                                </ul>
+                                                <a class="aa-browse-btn" href="#">Xem tất cả <span class="fa fa-long-arrow-right"></span></a>
+                                            </div>
+                                <!-- / new product category -->
+
+                                        </div>
+                            <!-- quick view modal -->
+                                            <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            <div class="row">
+                                                                <!-- Modal view slider -->
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <div class="aa-product-view-slider">
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Modal view content -->
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <div class="aa-product-view-content">
+                                                                        <h3></h3>
+                                                                        <div class="aa-price-block">
+                                                                            <span class="aa-product-view-price"></span>                                                                   
+                                                                        </div>
+                                                                        <p><!--des--></p>                                                                     
+                                                                        <div class="aa-prod-quantity">
+                                                                            <input type="number" size="4" value="1" id="quantity" />
+                                                                            <p class="aa-prod-category">
+                                                                                Danh mục: <a href="#">Polo T-Shirt</a>
+                                                                            </p>
+                                                                        </div>
+                                                                        <input type="hidden" id="hidProductId" value="0" />
+                                                                        <div class="aa-prod-view-bottom">
+                                                                           
+                                                                            <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                                            <a href="#" class="aa-add-to-cart-btn">Xem chi tiết</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- / quick view modal -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- / Products section -->
+                <!--Suport-->
+                @{Html.RenderAction("_Suport", "Home");}                
+                <!--/Suport-->
+                <!-- popular section -->
+                @if (ListFalse.Count > 0)
+                {
+                    <section id="aa-popular-category">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="aa-popular-category-area">
+                                        <!-- start prduct navigation -->
+                                        <ul class="nav nav-tabs aa-products-tab">
+                                            <li class="active"><a href="#popular" data-toggle="tab">Hàng sắp về</a></li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <!-- Start men popular category -->
+                                            <div class="tab-pane fade in active" id="popular">
+                                                <ul class="aa-product-catg aa-popular-slider">
+
+                                                    <!-- start single product item -->
+                                                    @foreach (var item in ListFalse)
+                                                    {
+
+                                                        <li>
+                                                            <figure>
+                                                                <a class="aa-product-img" href="#"><img src="@item.image" alt="@item.productName"></a>                                                               
+                                                                <figcaption>
+                                                                    <div class="aa-product-title"><a title="@item.productName" href="#">@item.productName</a></div>
+                                                                    <span class="aa-product-price">@string.Format("{0:0,0}", item.price)<sup><u>đ</u></sup></span><span class="aa-product-price"><del>@string.Format("{0:0,0}", item.promotionPrice)</del></span>
+                                                                </figcaption>
+                                                            </figure>
+                                                            <div class="aa-product-hvr-content" id="aa-product-hvr-content_@item.ID">
+                                                                <a href="#" class="like" id="like_@item.ID" data-id="@item.ID" data-toggle="tooltip" data-placement="top" title="Yêu thích"><span class="fa fa-heart-o"></span></a>
+                                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Chi tiết"><span class="fa fa-exchange"></span></a>
+                                                                <a href="#" class="quick-view" data-id="@item.ID" data-toggle2="tooltip" data-placement="top" title="Xem nhanh" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                                                            </div>
+                                                            <!-- product badge -->
+                                                             <span class="aa-badge aa-sold-out" href="#">Hết hàng!</span>
+                                                        </li>
+                                                    }
+                                                </ul>                                                
+                                            </div>
+                                            <!-- / popular product category -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                }
+                <!-- / popular section -->
+                <!-- Latest Blog -->
+  <section id="aa-latest-blog">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-latest-blog-area">
+            <h2>BÀI VIẾT THỜI TRANG</h2>
+            <div class="row">
+              <!-- single latest blog -->
+              <div class="col-md-4 col-sm-4">
+                <div class="aa-latest-blog-single">
+                  <figure class="aa-blog-img">                    
+                    <a href="#"><img src="img/promo-banner-1.jpg" alt="img"></a>  
+                      <figcaption class="aa-blog-img-caption">
+                      <span href="#"><i class="fa fa-eye"></i>5K</span>
+                      <a href="#"><i class="fa fa-thumbs-o-up"></i>426</a>
+                      <a href="#"><i class="fa fa-comment-o"></i>20</a>
+                      <span href="#"><i class="fa fa-clock-o"></i>June 26, 2016</span>
+                    </figcaption>                          
+                  </figure>
+                  <div class="aa-blog-info">
+                    <h3 class="aa-blog-title"><a href="#">Lorem ipsum dolor sit amet</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, ad? Autem quos natus nisi aperiam, beatae, fugiat odit vel impedit dicta enim repellendus animi. Expedita quas reprehenderit incidunt, voluptates corporis.</p> 
+                    <a href="#" class="aa-read-mor-btn">Read more <span class="fa fa-long-arrow-right"></span></a>
+                  </div>
+                </div>
+              </div>
+              <!-- single latest blog -->
+              <div class="col-md-4 col-sm-4">
+                <div class="aa-latest-blog-single">
+                  <figure class="aa-blog-img">                    
+                    <a href="#"><img src="img/promo-banner-3.jpg" alt="img"></a>  
+                      <figcaption class="aa-blog-img-caption">
+                      <span href="#"><i class="fa fa-eye"></i>5K</span>
+                      <a href="#"><i class="fa fa-thumbs-o-up"></i>426</a>
+                      <a href="#"><i class="fa fa-comment-o"></i>20</a>
+                      <span href="#"><i class="fa fa-clock-o"></i>June 26, 2016</span>
+                    </figcaption>                          
+                  </figure>
+                  <div class="aa-blog-info">
+                    <h3 class="aa-blog-title"><a href="#">Lorem ipsum dolor sit amet</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, ad? Autem quos natus nisi aperiam, beatae, fugiat odit vel impedit dicta enim repellendus animi. Expedita quas reprehenderit incidunt, voluptates corporis.</p> 
+                     <a href="#" class="aa-read-mor-btn">Read more <span class="fa fa-long-arrow-right"></span></a>         
+                  </div>
+                </div>
+              </div>
+              <!-- single latest blog -->
+              <div class="col-md-4 col-sm-4">
+                <div class="aa-latest-blog-single">
+                  <figure class="aa-blog-img">                    
+                    <a href="#"><img src="img/promo-banner-1.jpg" alt="img"></a>  
+                      <figcaption class="aa-blog-img-caption">
+                      <span href="#"><i class="fa fa-eye"></i>5K</span>
+                      <a href="#"><i class="fa fa-thumbs-o-up"></i>426</a>
+                      <a href="#"><i class="fa fa-comment-o"></i>20</a>
+                      <span href="#"><i class="fa fa-clock-o"></i>June 26, 2016</span>
+                    </figcaption>                          
+                  </figure>
+                  <div class="aa-blog-info">
+                    <h3 class="aa-blog-title"><a href="#">Lorem ipsum dolor sit amet</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, ad? Autem quos natus nisi aperiam, beatae, fugiat odit vel impedit dicta enim repellendus animi. Expedita quas reprehenderit incidunt, voluptates corporis.</p> 
+                    <a href="#" class="aa-read-mor-btn">Read more <span class="fa fa-long-arrow-right"></span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>    
+      </div>
+    </div>
+  </section>
+            <!-- / Latest Blog -->

@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="aa-product-category">
+    <div class="container">
+        <div class="row">
+            <nav class="woocommerce-breadcrumb">
+                <a href="/">Trang chủ</a>
+                <span class="navigation-pipe"> </span>
+                Giỏ hàng
+            </nav>
+
+            <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                <h1 class="page-heading">
+                    <span class="page-heading-title">Giỏ hàng</span>
+                </h1>
+                <div class="cart-view-area">
+                    <div class="cart-view-table">
+                        <form action="">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Tên</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                                            <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"></a></td>
+                                            <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
+                                            <td>$250</td>
+                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
+                                            <td>$250</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                                            <td><a href="#"><img src="img/man/polo-shirt-2.png" alt="img"></a></td>
+                                            <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
+                                            <td>$150</td>
+                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
+                                            <td>$150</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                                            <td><a href="#"><img src="~/img/man/polo-shirt-3.png" alt="img"></a></td>
+                                            <td><a class="aa-cart-title" href="#">Polo sdfsdfsdf sdfsdf sfsd T-Shirt dsf dsfs df dsf fsdf</a></td>
+                                            <td>150,050<sup><u>đ</u></sup></td>
+                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
+                                            <td>150,050<sup><u>đ</u></sup></td>
+                                        </tr>
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                        <!-- Cart Total view -->
+                        <div class="cart-view-total">
+                            <h4>Tổng giỏ hàng</h4>
+                            <table class="aa-totals-table">
+                                <tbody>
+                            
+                                    <tr>
+                                        <th>Tổng tiền</th>
+                                        <td>200.000<sup><u>đ</u></sup></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="#" class="aa-cart-view-btn">Thanh toán</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            @{Html.RenderAction("_Category", "Home");}
+        </div>
+    </div>
+</section>
