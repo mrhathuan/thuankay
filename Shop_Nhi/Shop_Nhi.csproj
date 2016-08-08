@@ -202,6 +202,8 @@
     </Compile>
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\DAO\CategoryDAO.cs" />
+    <Compile Include="Models\DAO\OrderDAO.cs" />
+    <Compile Include="Models\DAO\OrderDetailsDAO.cs" />
     <Compile Include="Models\DAO\ProductDAO.cs" />
     <Compile Include="Models\DAO\UserDAO.cs" />
     <Compile Include="Models\Framework\About.cs">
@@ -279,6 +281,7 @@
     <Compile Include="Models\Framework\User.cs">
       <DependentUpon>DBConnect.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2096,6 +2099,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Cart\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

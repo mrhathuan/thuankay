@@ -24,7 +24,7 @@
                     <!-- logo  -->
                     <div class="aa-logo">
                         <!-- Text based logo -->
-                        <a href="nhinguyenfashion.com">
+                        <a href="/">
                             <span class="fa fa-shopping-cart"></span>
                             <p>pn<strong>fashion</strong> <span>Đẹp hơn mỗi ngày</span></p>
                         </a>
@@ -43,24 +43,14 @@
                             <ul>
                                     
                                 @foreach (var item in Model)
-                                {
-                                    decimal? gia = 0;
-                                        if(item.product.promotionPrice > 0)
-                                        {
-                                            gia = item.product.promotionPrice;
-                                        }
-                                        else
-                                        {
-                                            gia = item.product.price;
-                                        }
-                                    
-                                    <li>
+                                {                
+                                    <li id="aa-cartbox-item_@item.product.ID">
                                           <a class="aa-cartbox-img"><img src="@item.product.image" alt="@item.product.productName"></a>
                                           <div class="aa-cartbox-info">
                                             <h4><a>@item.product.productName</a></h4>
-                                            <p>@item.quantity x @gia</p>
+                                            <p>@item.quantity x @string.Format("{0:0,0}", item.product.promotionPrice.HasValue?item.product.promotionPrice.GetValueOrDefault(0) : item.product.price.GetValueOrDefault(0))</p>
                                           </div>
-                                          <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
+                                          <a class="aa-remove-product" data-id="@item.product.ID" href="#"><span class="fa fa-times"></span></a>
                                     </li>
                                 }
                                                         
@@ -69,7 +59,7 @@
                                         Tổng tiền
                                     </span>
                                     <span class="aa-cartbox-total-price">
-                                       @tongtien<sup><u>đ</u></sup>
+                                       @string.Format("{0:0,0}", tongtien)<sup><u>đ</u></sup>
                                     </span>
                                 </li>
                             </ul>

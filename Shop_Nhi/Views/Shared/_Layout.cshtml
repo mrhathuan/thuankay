@@ -109,7 +109,32 @@
         });
     </script>
 
-   
+    <!--remove cart-box-->
+   <script type="text/javascript">
+    $(document).ready(function () {
+        $('.aa-remove-product').off('click').on('click', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var cartitem = '#aa-cartbox-item_' + id;
+            $.ajax({
+                url: "@Url.Action("DelItemCart","Cart")",
+                data: { id: id },
+                type: "POST",
+                dataType: "JSON",
+                success: function (res) {
+                    $(cartitem).remove();
+                    $('.aa-cartbox-total-price').empty().append('' + addPeriod(res.tongtien) + '<sup><u>đ</u></sup>');
+                    $('.aa-cart-notify').html(res.soluong);
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                    toastr.error('Xóa thất bại', '');
+                }
+            })
+        })
+        return false;
+    });
+   </script>
     
 
 </body>

@@ -21,6 +21,7 @@ namespace Shop_Nhi
                namespaces: new[] { "Shop_Nhi.Controllers" }
            );
 
+
             //Product Category
             routes.MapRoute(
                 name: "Product Category",
@@ -77,15 +78,15 @@ namespace Shop_Nhi
                 namespaces: new[] { "Shop_Nhi.Controllers" }
                 );
 
-            //Trang thanh toán
+            //Gửi đơn hàng
             routes.MapRoute(
-                name: "Payments",
-                url: "thanh-toan",
-                defaults: new { controller = "Payments", action = "Index", id = UrlParameter.Optional },
+                name: "SendOrder",
+                url: "gui-don-hang",
+                defaults: new { controller = "Cart", action = "SendOrder", id = UrlParameter.Optional },
                 namespaces: new[] { "Shop_Nhi.Controllers" }
                 );
 
-            //Gửi đơn hàng
+            //Trang thanh toán
             routes.MapRoute(
                 name: "Payment",
                 url: "thanh-toan-don-hang",

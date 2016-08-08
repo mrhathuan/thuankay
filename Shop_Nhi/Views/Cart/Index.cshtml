@@ -1,7 +1,143 @@
-﻿
+﻿@model List<Shop_Nhi.Models.CartItem>
+
 @{
-    ViewBag.Title = "Giỏ hàng";
+    ViewBag.Title = "Giỏ Hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal tongtien = 0;
+    foreach (var item in Model)
+    {
+        if (item.product.promotionPrice > 0)
+        {
+            tongtien += item.product.promotionPrice.GetValueOrDefault(0) * item.quantity;
+
+        }
+        else
+        {
+            tongtien += item.product.price.GetValueOrDefault(0) * item.quantity;
+ 
+        }
+    }      
+}            
+
+
+@section JsFooter{
+    
+
+    <!--Cart-->
+    <!--DelItem-->
+    <script>
+        $(document).ready(function () {
+            $('.remove').off('click').on('click', function (e) {
+                e.preventDefault();
+                var cf = confirm("Bạn chắc chắn muốn xóa sản phẩm này?");
+                var id = $(this).data('id');
+                var cartitem = '#cartitem_' + id;
+                if (cf) {
+                    $.ajax({
+                        url:"@Url.Action("DelItemCart","Cart")",
+                        data:{id:id},
+                        type:"POST",
+                        dataType:"JSON",
+                        success: function (res) {
+                            if (res.tongtien != 0) {                               
+                                $(cartitem).remove();
+                                $('#cart-total').empty().append('' + addPeriod(res.tongtien) + '<sup><u>đ</u></sup>');
+                                $('.aa-cart-notify').empty().append(res.soluong);
+                                toastr.success('Xóa thành công', '');
+                            } else {
+                                $('.cart-view-table').remove();
+                                $('.aa-cart-notify').html('0');
+                                $('.cart-view-area').append('<p>Chưa có sản phẩm nào trong giỏ</p>');
+                            }
+                        },
+                        error: function (errormessage) {
+                            alert(errormessage.responseText);
+                            toastr.error('Xóa thất bại', '');
+                        }
+                    })
+                }
+            })
+            return false;
+        });
+    </script>
+
+    <!--DelAll-->
+    <script>
+        $(document).ready(function () {
+            $('#dellAll').click(function (e) {
+                e.preventDefault();
+                var cf = confirm("Bạn chắc chắn muốn hủy mua hàng?");
+                if (cf) {
+                    $.ajax({
+                        url:"@Url.Action("DelAll","Cart")",
+                        type:"POST",
+                        dataType:"JSON",
+                        success: function (res) {
+                            if (res.status == true) {
+                                $('.aa-cart-notify').empty().append('0');
+                                $('.cart-view-table').remove();
+                                $('.cart-view-area').empty().append('<p>Chưa có sản phẩm nào trong giỏ</p>');
+                                $('.aa-cartbox-summary ul').empty().append('<li>' +
+                                   ' <span class="aa-cartbox-total-title">' +
+                                       ' Tổng tiền  </span>' +
+                                   ' <span class="aa-cartbox-total-price">' +
+                                       '0 <sup><u>đ</u></sup>' +
+                                    '</span>' +
+                               ' </li>')
+                            }
+                        }
+                    })
+                }
+            })
+            return false;
+        });
+    </script>
+    <!--Update Cart-->
+    <script>
+        $(document).ready(function () {
+            $('.aa-cart-quantity').change(function () {
+                var id = $(this).data('id');
+                var qty = $(this).val();
+                var gia_now = '#thanhtien_' + id;
+                if (qty > 0) {
+                    $.ajax({
+                        url: "@Url.Action("UpdateCart", "Cart")",
+                        data: { id: id, qty: qty },
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (res) {
+                            $(gia_now).empty().append(addPeriod(res.thanhtien) + ' <sup><u>đ</u></sup>');
+                            $('#cart-total').empty().append('' + addPeriod(res.tongtien) + '<sup><u>đ</u></sup>');
+                            $('.aa-cart-notify').empty().append(res.soluong);
+                            toastr.success('Cập nhật giỏ hàng thành công', '');
+                        }
+                    });
+                } else {
+                    toastr.error('Số lượng không đúng', '');
+                    setTimeout(function () {
+                        location.href = '/gio-hang';
+                    }, 2000);
+                }
+            })
+            return false;
+        });
+    </script>
+
+    <!--Payment-->
+    <!--Định dạng tiền-->
+    <script>
+        function addPeriod(nStr) {
+            nStr += '';
+            var x = nStr.split(',');
+            var x1 = x[0];
+            var x2 = x.length > 1 ? ',' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+    </script>
 }
 
 
@@ -18,7 +154,10 @@
                 <h1 class="page-heading">
                     <span class="page-heading-title">Giỏ hàng</span>
                 </h1>
+               
                 <div class="cart-view-area">
+                    @if (Model.Count > 0)
+                    {
                     <div class="cart-view-table">
                         <form action="">
                             <div class="table-responsive">
@@ -34,52 +173,49 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                            <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"></a></td>
-                                            <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                                            <td>$250</td>
-                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                                            <td>$250</td>
+                                        @foreach (var item in Model)
+                                        {
+                                         <tr id="cartitem_@item.product.ID">
+                                            <td><a class="remove" data-id="@item.product.ID" href="#"><fa class="fa fa-close"></fa></a></td>
+                                            <td><a href="#"><img src="@item.product.image" alt="@item.product.productName"></a></td>
+                                            <td><a class="aa-cart-title" href="/chi-tiet/@item.product.metatTitle-@item.product.ID">@item.product.productName</a></td>
+                                            <td>@string.Format("{0:0,0}", item.product.promotionPrice.HasValue?item.product.promotionPrice.Value : item.product.price.Value)<sup><u>đ</u></sup></td>
+                                            <td><input class="aa-cart-quantity" data-id="@item.product.ID" id="quantity" min="1" max="100" type="number" value="@item.quantity"></td>
+                                            <td id="thanhtien_@item.product.ID">@string.Format("{0:0,0}", item.quantity * (item.product.promotionPrice.HasValue ? item.product.promotionPrice.GetValueOrDefault(0) : item.product.price.GetValueOrDefault(0)))<sup><u>đ</u></sup></td>
                                         </tr>
+                                        }
+                                          
                                         <tr>
-                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                            <td><a href="#"><img src="img/man/polo-shirt-2.png" alt="img"></a></td>
-                                            <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                                            <td>$150</td>
-                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                                            <td>$150</td>
+                                            <td colspan="6" class="aa-cart-view-bottom"> 
+                                                <a href="#" id="dellAll" class="aa-cart-view-btn"><i class="fa fa-trash"></i> Hủy giỏ hàng</a>                                                                                               
+                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                            <td><a href="#"><img src="~/img/man/polo-shirt-3.png" alt="img"></a></td>
-                                            <td><a class="aa-cart-title" href="#">Polo sdfsdfsdf sdfsdf sfsd T-Shirt dsf dsfs df dsf fsdf</a></td>
-                                            <td>150,050<sup><u>đ</u></sup></td>
-                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                                            <td>150,050<sup><u>đ</u></sup></td>
-                                        </tr>
-                                   
+                                                                     
                                     </tbody>
                                 </table>
                             </div>
                         </form>
                         <!-- Cart Total view -->
                         <div class="cart-view-total">
-                            <h4>Tổng giỏ hàng</h4>
                             <table class="aa-totals-table">
-                                <tbody>
-                            
+                                <tbody>                          
                                     <tr>
                                         <th>Tổng tiền</th>
-                                        <td>200.000<sup><u>đ</u></sup></td>
+                                        <td id="cart-total">@string.Format("{0:0,0}",tongtien)<sup><u>đ</u></sup></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="aa-cart-view-btn">Thanh toán</a>
+                            <a href="/thanh-toan-don-hang" class="aa-cart-view-btn">Đặt mua <i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
-                </div>
-
+                     
+                    }
+                        else
+                        {
+                            <p>Chưa có sản phẩm nào trong giỏ</p>
+                        }   
+                        
+                </div>               
             </div>
 
 

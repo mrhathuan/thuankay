@@ -12,8 +12,10 @@ namespace Shop_Nhi.Controllers
 {
 
     public class CartController : Controller
-    {      
+    {
         // GET: Cart
+
+        #region cart
         public ActionResult Index()
         {
             var cart = Session["CartSession"];
@@ -91,6 +93,7 @@ namespace Shop_Nhi.Controllers
                     tongtien,
                     productItem = cartItem.Select(p => new
                     {
+                        ID = p.product.ID,
                         productName = p.product.productName,
                         price = p.product.promotionPrice.HasValue? p.product.promotionPrice : p.product.price,
                         image = p.product.image,
@@ -186,7 +189,57 @@ namespace Shop_Nhi.Controllers
                 soluong = cart.Count
             });
         }
-       
+
+        #endregion cart
+
+
+        #region payment
+
+        [HttpGet]
+        public ActionResult Payment()
+        {
+            var cart = Session["CartSession"];
+            var cartItem = new List<CartItem>();
+            var orderDao = new OrderDAO();
+            var pay = orderDao.GetPay();
+            ViewBag.CartItem = null;
+            decimal total = 0;
+            if (cart != null)
+            {
+                cartItem = (List<CartItem>)cart;
+                foreach (var item in cartItem)
+                {
+                    total += (item.quantity * (item.product.promotionPrice.HasValue ? item.product.promotionPrice.GetValueOrDefault(0) : item.product.price.GetValueOrDefault(0)));
+                }
+                ViewBag.Total = total;
+                ViewBag.Pay = pay;
+                return View(cartItem);
+            }
+            else
+            {
+                return Redirect("/gio-hang");
+            }
+            
+        }
+
+
+        [HttpGet]
+        public ActionResult SendOrder(string fullname, string address, string email, string phone, int pay)
+        {
+            try
+            {
+                
+            }
+            catch
+            {
+                return HttpNotFound();
+            }
+            
+            return View();
+        }
+
+        #endregion payment
+
         ////Đặt đơn hàng
         //[HttpGet]
         //public ActionResult Payment(string name, string phone, string email, string address, string cachnhanhang)

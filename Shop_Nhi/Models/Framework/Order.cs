@@ -28,7 +28,7 @@ namespace Shop_Nhi.Models.Framework
         public string message { get; set; }
         public Nullable<decimal> totalAmount { get; set; }
         public Nullable<int> payID { get; set; }
-        public Nullable<bool> status { get; set; }
+        public bool status { get; set; }
     
         public virtual Pay Pay { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

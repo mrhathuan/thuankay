@@ -100,11 +100,20 @@
                         </h3>
                     
                         <h3 class="detail-sp">
-                            Số lượng mua: <span><input maxlength="2" id="quantity" value="1" type="number"></span>
+                            Số lượng mua: <span><input maxlength="2" id="quantity" min="1" max="99" value="1" type="number"></span>
                         </h3>
                   
-                        <h3 class="detail-sp"><a id="AddCartDetail" data-id="@Model.ID" href="#"><img src="~/img/btnAddCart.png"></a></h3>
-                        <hr class="detail-dongke">
+                        <h3 class="detail-sp">
+                            @if (Model.quantity != null) { 
+                                <a id="AddCartDetail" data-id="@Model.ID" href="#"><img src="~/img/btnAddCart.png"></a>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-warning disabled"><span class="fa fa-ban"></span> Đặt mua</button>
+                            }
+                            
+                        </h3>
+                        
                         <div class="fb-like"></div>
                         <div class="fb-share-button" data-layout="button_count"></div>
                         <br>
@@ -123,9 +132,7 @@
 
                     <div class="tab-content">
                         <div id="detail" class="tab-pane fade in active">
-                            <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.
-
-Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, </p>
+                            @Html.Raw(Model.detail)
                         </div>
                         <div id="comment" class="tab-pane fade">
                             <div id="fb-root"></div>
@@ -202,9 +209,8 @@ Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. N
                                                     </div>
                                                     <input type="hidden" id="hidProductId" value="0" />
                                                     <div class="aa-prod-view-bottom">
-                                                       
-                                                        <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
-                                                        <a href="#" class="aa-add-to-cart-btn">Xem chi tiết</a>
+                                                        <a href="#" class="aa-add-to-cart-btn" id="add-cart-modal"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ</a>
+                                                        <a href="#" id="aa-cart-modal-detail" class="aa-add-to-cart-btn">Xem chi tiết</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,27 +221,7 @@ Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. N
                         </div><!-- / quick view modal -->
                         <!-- / quick view modal -->
                     </div>
-                    <div class="aa-product-catg-pagination">
-                        <nav>
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+               
                 </div>
 
              </div>

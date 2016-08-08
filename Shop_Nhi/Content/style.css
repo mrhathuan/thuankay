@@ -85,8 +85,31 @@ h2 {
 img {
   border: none;
 }
+.error{
+    display: none;
+    float: right;
+    font-size: 18px;
+    line-height: 24px;
+    width: 20px;
+    position:absolute;
+    border:medium none;
+    outline:medium none;
+    top:7px;
+    right:0px;
+    color:#9b1a2e;
+}
+.error.show{
+    display:block;
+}
+.text-error{
+    border:solid 1px #cd2d2d;
+}
+.btn-warning{
+    background-color:#ff871c;
+    font-size:16px;
+}
 .woocommerce-breadcrumb {
-     font-size: 16px;
+    font-size: 16px;
     padding-top: 16px;
     padding-left:15px;
     color: #777;
@@ -629,6 +652,7 @@ img {
 }
 #aa-header .aa-header-bottom .aa-cartbox .aa-cartbox-summary ul li .aa-cartbox-info p {
   font-size: 16px;
+  color:#cd2d2d;
 }
 #aa-header .aa-header-bottom .aa-cartbox .aa-cartbox-summary ul li .aa-remove-product {
   border: 1px solid transparent;
@@ -663,6 +687,7 @@ img {
   font-size: 16px;
   font-family: "Lato", sans-serif;
   letter-spacing: 0.5px;
+  color:#cd2d2d;
 }
 
 /*==================
@@ -2010,6 +2035,7 @@ img {
 }
 #aa-product-category .aa-sidebar .aa-sidebar-widget .aa-recently-views ul li .aa-cartbox-info p {
   font-size: 16px;
+  color:
 }
 #aa-product-category .aa-product-catg-content {
   display: inline;
@@ -2234,7 +2260,7 @@ img {
   width: 50px;
 }
 .cart-view-area .cart-view-table .table tbody tr .aa-cart-view-bottom {
-  padding: 50px;
+  padding: 20px;
 }
 .cart-view-area .cart-view-table .table tbody tr .aa-cart-view-bottom .aa-cart-coupon {
   float: left;
@@ -2394,6 +2420,7 @@ h3.detail-sp{
   width: 100%;
   margin-bottom: 15px;
   float: left;
+  position:relative;
 }
 #checkout .checkout-area .checkout-left .panel-group .aa-checkout-billaddress .aa-checkout-single-bill input {
   border: 1px solid #ccc;
@@ -2460,92 +2487,13 @@ h3.detail-sp{
   margin-top: -10px;
   width: 80%;
 }
-#checkout .checkout-area .checkout-right .aa-payment-method input[type="submit"] {
+#checkout .checkout-area .checkout-right .aa-payment-method button[type="submit"] {
   display: block;
-  margin-top: 15px;
   padding: 8px 12px;
-  width: 100%;
+  border-radius:0;
 }
 
-/*==================
- MY ACCOUNT  PAGE
-====================*/
 
-#aa-myaccount {
-  display: inline;
-  float: left;
-  width: 100%;
-}
-#aa-myaccount .aa-myaccount-area {
-  display: inline;
-  float: left;
-  padding: 100px 0;
-  width: 100%;
-}
-#aa-myaccount .aa-myaccount-area h4 {
-  border-bottom: 1px solid #ccc;
-  font-size: 25px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-}
-#aa-myaccount .aa-myaccount-area .aa-myaccount-login {
-  display: inline;
-  float: left;
-  width: 100%;
-}
-#aa-myaccount .aa-myaccount-area .aa-myaccount-register {
-  display: inline;
-  float: left;
-  width: 100%;
-}
-
-/*---- Login form ----*/
-
-.aa-login-form input[type="text"],
-.aa-login-form input[type="password"] {
-  border: 1px solid #ccc;
-  font-size: 16px;
-  height: 40px;
-  margin-bottom: 5px;
-  padding: 10px;
-  width: 100%;
-}
-.aa-login-form .error{
-    width:100%;
-    font-size:14px;
-    color:rgba(242, 140, 140, 1);
-    font-family:Arial Tahoma;
-}
-.aa-login-form label {
-  font-weight: normal;
-  margin-top: 8px;
-}
-.aa-login-form label span {
-  color: red;
-}
-.aa-login-form .rememberme {
-  cursor: pointer;
-  margin-top: 18px;
-}
-.aa-login-form input[type="checkbox"] {
-  margin-top: 5px;
-}
-.aa-login-form button {
-  font-size: 14px;
-  padding: 8px 20px;
-  margin-right: 5px;
-  margin-top: 10px;
-  float: left;
-}
-.aa-login-form .aa-lost-password {
-  color: #555;
-  margin-top: 10px;
-  width: 100%;
-}
-.aa-login-form .aa-lost-password a {
-  color: #555;
-}
 
 /*---- LOGIN MODAL ----*/
 

@@ -1,9 +1,5 @@
 /** 
-  * Template Name: Daily Shop
-  * Version: 1.0  
-  * Template Scripts
-  * Author: MarkUps
-  * Author URI: http://www.markups.io/
+
 
   Custom JS
   

@@ -41,9 +41,9 @@ namespace Shop_Nhi.Controllers
             {
                 var dao = new ProductDAO();
                 var product = new Product();
+                var category = new Category();
                 var data = dao.GetById(id);
                 decimal? price = 0;
-                var category = "";
                 if (data.promotionPrice != null)
                 {
                     price = data.promotionPrice;
@@ -54,13 +54,15 @@ namespace Shop_Nhi.Controllers
                 }
                 product.ID = data.ID;
                 product.metatTitle = data.metatTitle;
-                product.productName = data.productName;
-                //product.Category.name = data.Category.name;
-                category = data.Category.name;
+                product.productName = data.productName;                                
                 product.price = price;
                 product.quantity = data.quantity;
                 product.description = data.description;
                 product.image = data.image;
+
+                category.name = data.Category.name;
+                category.ID = data.Category.ID;
+                category.metatTitle = data.Category.metatTitle;
                 return Json(new
                 {
                     status = true,
