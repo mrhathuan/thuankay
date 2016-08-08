@@ -2,41 +2,94 @@
 
 
 @{
-    ViewBag.Title = "Thanh toán-nhinguyenfashion.com";
+    ViewBag.Title = "Thanh toán nhinguyenfashion.com";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    List<Shop_Nhi.Models.Framework.Pay> listPay = (List<Shop_Nhi.Models.Framework.Pay>)ViewBag.Pay;
+    List<Shop_Nhi.Models.Framework.Pay> pay = (List<Shop_Nhi.Models.Framework.Pay>)ViewBag.Pay;
+    decimal toltal = 0;
+    foreach (var item in Model)
+    {
+        toltal += (item.quantity * (item.product.promotionPrice.HasValue ? item.product.promotionPrice.GetValueOrDefault(0) : item.product.price.GetValueOrDefault(0)));
+    }
 }
-
 
 @section JsFooter{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var data = {
-                fullName: $('#fullname').val(),
-                address: $('#address').val(),
-                email: $('#email').val(),
-                phone: $('#phone').val(),
-                pay: $('select[name=pay]').val()
-            }
-            $('.error').html('');
-            $('input').keypress(function () {
-                $('.error').removeClass('show');
-                $('input').removeAttr('style');
-            })
-            $('#form-payment').submit(function (e) {
-                e.preventDefault();
-                var submit = true;
-                if (submit) {
-                    this.submit();
-                    $('#send').button('loading');
-                } else {
-                    return false;
+    
+<script src="~/Scripts/jquery.validate.js"></script>
+
+    <script>
+        var icon = "fa fa-info-circle";
+        $.validator.setDefaults({
+            submitHandler: function () {
+                var data = {
+                    fullname: $('#fullname').val(),
+                    address: $('#address').val(),
+                    phone: $('#phone').val(),
+                    email: $('#email').val(),
+                    message: $('#message').val(),
+                    pay: $('#pay').val(),
                 }
-            })
+                if ($.trim(data.pay) == 0) {
+                    toastr.error('Phương thức thanh toán không đúng', '');
+                } else {
+                    $('#send-order').button('loading');
+                    $.ajax({
+                        url: '/gui-don-hang',
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function (res) {
+                            if (res.status == true) {
+                                setTimeout(function () {
+                                    toastr.warning('Gửi đơn hàng thành công', '');
+                                    location.href = '/gio-hang';
+                                },1300)
+                            } else {
+                                toastr.warning('Lỗi thanh toán', '');
+                                location.href = '/thanh-toan-don-hang';
+                            }
+                        }
+                    })
+                }
+            }
+        });
+        $().ready(function () {
+            $("#cusform").validate({
+                rules: {
+                    fullname: {
+                        required: true,
+                        minlength: 2
+                    },
+                    address:"required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    phone: {
+                        required: true,
+                        minlength: 9,
+                        number:true
+                    }
+                },
+                    messages: {
+                        fullname: {
+                            required: '<span class="fa fa-info-circle"></span>',
+                            minlength: '<span class="fa fa-info-circle"></span>'
+                        },
+                        address: '<span class="fa fa-info-circle"></span>',
+                        email: {
+                            required: '<span class="fa fa-info-circle"></span>',
+                            email: '<span class="fa fa-info-circle" data-toggle="tooltip" title="Địa chỉ email không hợp lệ"></span>'
+                        },                  
+                        phone: {
+                            required: '<span class="fa fa-info-circle"></span>',
+                            minlength: '<span class="fa fa-info-circle" data-toggle="tooltip" title="Địa chỉ email không hợp lệ"></span>'
+                        }
+                    }
+                })
         });
     </script>
-}
+    }
+
+
     <!-- Cart view section -->
 <section id="checkout">
     <div class="container">
@@ -44,131 +97,132 @@
             <div class="col-md-12">
                 <div class="checkout-area">
 
-                    <form method="get" action="/gui-don-hang" id="form-payment">
+                    <form method="get" action="#" id="cusform" novalidate>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="checkout-left">
+                                        <div class="panel-group" id="accordion">
 
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="checkout-left">
-                                    <div class="panel-group" id="accordion">
+                                            <!-- Billing Details -->
+                                            <div class="panel panel-default aa-checkout-billaddress">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#">
+                                                            THÔNG TIN THANH TOÁN
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseThree" class="panel-collapse collapse in">
 
-                                        <!-- Billing Details -->
-                                        <div class="panel panel-default aa-checkout-billaddress">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#">
-                                                        THÔNG TIN THANH TOÁN
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseThree" class="panel-collapse collapse in">
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="aa-checkout-single-bill" >
-                                                                <input type="text" name="fullname" id="fullname" placeholder="Họ tên*" />
-                                                                <div class="error" id="aa-fullname"><i class="fa fa-info-circle" title="Chưa nhập"></i></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="aa-checkout-single-bill" id="aa-address">
-                                                                <input type="text" name="address" id="address" placeholder="Địc chỉ*" />
-                                                                <div class="error" id="aa-address"><i class="fa fa-info-circle" title="Chưa nhập"></i></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="aa-checkout-single-bill" id="aa-email">
-                                                                <input type="email" name="email" id="email" placeholder="Email*" />
-                                                                <div class="error"><i class="fa fa-info-circle" title="Chưa nhập"></i></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="aa-checkout-single-bill" id="aa-phone">
-                                                                <input type="tel" name="phone" id="phone" placeholder="Số điện thoại*" />
-                                                                <div class="error"><i class="fa fa-info-circle" title="Chưa nhập"></i></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="aa-checkout-single-bill">
-                                                                <textarea cols="8" rows="3">Lời nhắn</textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @if (listPay != null)
-                                                    {
+                                                    <div class="panel-body">
 
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <div class="aa-checkout-single-bill" id="aa-pay">
-                                                                    <select name="pay" id="pay">
-                                                                        <option value="0" selected>- Chọn phương thức thanh toán* -</option>
-
-                                                                        @foreach (var item in listPay)
-                                                                        {
-                                                                            <option value="@item.ID">@item.name</option>
-                                                                        }
-
-                                                                    </select>
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <input id="fullname" name="fullname" type="text" placeholder="Họ tên*" required />
 
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    }
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <input id="address" name="address" type="text" placeholder="Địa chỉ*" required />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <input id="email" name="email" type="email" placeholder="Email*" required />
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <input id="phone" name="phone" type="tel" placeholder="Số điện thoại*" required />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <textarea id="message" cols="8" rows="3">Lời nhắn</textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        @if (pay.Count > 0)
+                                                        {
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="aa-checkout-single-bill">
+                                                                        <select id="pay" name="pay">
+                                                                            <option value="0" selected="selected">- CHỌN PHƯƠNG THỨC THANH TOÁN* -</option>
+                                                                            @foreach (var item in pay)
+                                                                            {
+                                                                                <option value="@item.ID">@item.name</option>
+                                                                            }
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+
+
+                                                    </div>
+
                                                 </div>
-
                                             </div>
+
                                         </div>
-
                                     </div>
+
                                 </div>
-
-                            </div>
-                            <div class="col-md-4">
-                                <div class="checkout-right">
-                                    <h4>ĐƠN HÀNG CỦA BẠN</h4>
-                                    <div class="aa-order-summary-area">
-                                        <table class="table table-responsive">
-                                            <thead>
-                                                <tr>
-                                                    <th>SẢN PHẨM</th>
-                                                    <th>THÀNH TIỀN</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var item in Model)
-                                                {
-
+                                <div class="col-md-4">
+                                    <div class="checkout-right">
+                                        <h4>ĐƠN HÀNG CỦA BẠN</h4>
+                                        <div class="aa-order-summary-area">
+                                            <table class="table table-responsive">
+                                                <thead>
                                                     <tr>
-                                                        <td>@item.product.productName</td>
-                                                        <td>@string.Format("{0:0,0}", item.quantity * (item.product.promotionPrice.HasValue ? item.product.promotionPrice : item.product.price))<sup><u>đ</u></sup></td>
+                                                        <th>SẢN PHẨM</th>
+                                                        <th>THÀNH TIỀN</th>
                                                     </tr>
-                                                }
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model)
+                                                    {
 
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Tổng tiền</th>
-                                                    <td style="color:#cd2d2d;font-weight:700">@string.Format("{0:0,0}", ViewBag.Total)<sup><u>đ</u></sup></td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                    <div class="aa-payment-method">
-                                        <button type="submit" class="btn btn-warning"><i class="fa fa-credit-card"></i> Đặt hàng</button>
+                                                        <tr>
+                                                            <td>@item.product.productName</td>
+                                                            <td>@string.Format("{0:0,0}", item.quantity * (item.product.promotionPrice.HasValue ? item.product.promotionPrice : item.product.price))<sup><u>đ</u></sup></td>
+                                                        </tr>
+                                                    }
+
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Tổng tiền</th>
+                                                        <td style="color:#cd2d2d;font-weight:700">@string.Format("{0:0,0}", toltal)<sup><u>đ</u></sup></td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="aa-payment-method">
+                                            <button type="submit" id="send-order" data-loading-text="Đang gửi..." class="btn btn-warning"><i class="fa fa-credit-card"></i> Đặt hàng</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </form>
 
-</div>
+                            </div>
+                        </fieldset>
+                    </form>  
+                                
+                </div>
             </div>
         </div>
     </div>

@@ -109,7 +109,7 @@
         });
     </script>
 
-    <!--remove cart-box-->
+    <!--remove cart-->
    <script type="text/javascript">
     $(document).ready(function () {
         $('.aa-remove-product').off('click').on('click', function (e) {
@@ -122,9 +122,20 @@
                 type: "POST",
                 dataType: "JSON",
                 success: function (res) {
-                    $(cartitem).remove();
-                    $('.aa-cartbox-total-price').empty().append('' + addPeriod(res.tongtien) + '<sup><u>đ</u></sup>');
-                    $('.aa-cart-notify').html(res.soluong);
+                    if (res.tongtien != 0) {
+                        $(cartitem).remove();
+                        $('#cart-total').empty().append('' + addPeriod(res.tongtien) + '<sup><u>đ</u></sup>');
+                        $('.aa-cartbox-total-price').empty().append(addPeriod(res.tongtien));
+                        $('.aa-cart-notify').empty().append(res.soluong);
+                       
+                    } else {
+                        $(cartitem).remove();
+                        $('.aa-cart-notify').empty().append('0<sup><u>đ</u></sup>');
+                        $('.aa-cartbox-total-price').empty().append('0<sup><u>đ</u></sup>');
+                        $('.cart-view-table').remove();
+                        $('.cart-view-area').empty().append('<p>Chưa có sản phẩm nào trong giỏ</p>');
+                        $('.checkout-area').empty().append('<p>Chưa có sản phẩm nào trong giỏ</p>');
+                    }
                 },
                 error: function (errormessage) {
                     alert(errormessage.responseText);

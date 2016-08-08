@@ -112,10 +112,10 @@ h2 {
   border-bottom: 1px solid #ff871c;
 }
 .aa-product-catg li figure .aa-add-card-btn:hover {
-  color: #ff871c;
+  color: #000000;
 }
 .aa-product-catg li figure .aa-add-card-btn-ok:hover {
-  color: #ff871c;
+  color: #000000;
 }
 .aa-product-catg li .aa-product-title a:hover, .aa-product-catg li .aa-product-title a:focus {
   color: #ff871c;

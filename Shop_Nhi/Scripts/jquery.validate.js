@@ -352,11 +352,11 @@ $.extend( $.validator, {
 	messages: {
 		required: "This field is required.",
 		remote: "Please fix this field.",
-		email: '<span class="fa fa-info-circle" data-toggle="tooltip" title="Địa chỉ email không hợp lệ"></span>',
+		email: "Please enter a valid email address.",
 		url: "Please enter a valid URL.",
 		date: "Please enter a valid date.",
 		dateISO: "Please enter a valid date ( ISO ).",
-		number: '<span class="fa fa-info-circle" data-toggle="tooltip" title="Địa chỉ email không hợp lệ"></span>',
+		number: "Please enter a valid number.",
 		digits: "Please enter only digits.",
 		equalTo: "Please enter the same value again.",
 		maxlength: $.validator.format( "Please enter no more than {0} characters." ),

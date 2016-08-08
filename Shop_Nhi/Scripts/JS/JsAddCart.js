@@ -93,8 +93,12 @@ $(document).ready(function () {
                 $('.aa-cart-notify').html(res.soluong);                
                 $('.aa-cartbox-total-price').empty().append(addPeriod(res.tongtien+'<sup><u>đ</u></sup>'));
                 $(btn).empty().append('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>');
-                $(btn_id).empty().append('<a class="aa-add-card-btn-ok" href="/gio-hang"><span class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></span>Vào giỏ hàng</a>');
-                toastr.success('Thêm sản phẩm vào giỏ thành công', '');
+                $(btn_id).empty().append('<a class="aa-add-card-btn-ok"><span class="fa fa-refresh fa-pulse fa-1x fa-fw"></span> Thêm vào giỏ</a>');
+                setTimeout(function () {
+                    $(btn_id).empty().append('<a class="aa-add-card-btn-ok" href="/gio-hang"><span class="fa fa-check"></span> Xem giỏ hàng</a>');
+                    toastr.success('Thêm sản phẩm vào giỏ thành công', '');
+                }, 1300);
+               
             },
             error: function (errormessage) {
                 alert(errormessage.responseText);

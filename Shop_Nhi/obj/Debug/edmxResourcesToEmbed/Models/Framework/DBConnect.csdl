@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="About">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="createByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByDate" Type="DateTime" Precision="3" />
+    <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="metatTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="parentID" Type="Int32" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="createByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByDate" Type="DateTime" Precision="3" />
+    <Property Name="metatTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="showOnHome" Type="Boolean" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Category1" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="createByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByDate" Type="DateTime" Precision="3" />
+    <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="metatTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Footer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="createByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByDate" Type="DateTime" Precision="3" />
+    <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="metatTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="HelpBuy">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="createByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByDate" Type="DateTime" Precision="3" />
+    <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="metatTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="link" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="taget" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="dislayOrder" Type="Int32" />
+    <Property Name="typeID" Type="Int32" />
+    <Property Name="status" Type="Boolean" />
+    <NavigationProperty Name="MenuType" Relationship="Self.FK_Menu_MenuType" FromRole="Menu" ToRole="MenuType" />
+  </EntityType>
+  <EntityType Name="MenuType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Menus" Relationship="Self.FK_Menu_MenuType" FromRole="MenuType" ToRole="Menu" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="createByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="satus" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="dateSet" Type="DateTime" Precision="3" />
+    <Property Name="message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="payID" Type="Int32" />
+    <Property Name="status" Type="Boolean" />
+    <NavigationProperty Name="Pay" Relationship="Self.FK_Order_Pay" FromRole="Order" ToRole="Pay" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="orderID" />
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="orderID" Type="Int64" Nullable="false" />
+    <Property Name="productID" Type="Int64" Nullable="false" />
+    <Property Name="productCode" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="productName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="productPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="Amount" Type="Int32" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Pay">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Pay" FromRole="Pay" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="createByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByDate" Type="DateTime" Precision="3" />
+    <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="metatTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="createByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByDate" Type="DateTime" Precision="3" />
+    <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="metatTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="tag" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="productName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="moreImages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="promotionPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="chatlieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="madeIn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="size" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="like" Type="Int32" />
+    <Property Name="viewCount" Type="Int32" />
+    <Property Name="categoryID" Type="Int64" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="createByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modifiedByDate" Type="DateTime" Precision="3" />
+    <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metatTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="metaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category1" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Seo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="key" Type="Int32" />
+    <Property Name="value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Slide">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="detail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Theme">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="roleID" Type="Int32" />
+    <Property Name="status" Type="Boolean" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_Product_Category1">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="categoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_MenuType">
+    <End Role="MenuType" Type="Self.MenuType" Multiplicity="0..1" />
+    <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MenuType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="typeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Pay">
+    <End Role="Pay" Type="Self.Pay" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pay">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="payID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBConnect" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Abouts" EntityType="Self.About" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Contacts" EntityType="Self.Contact" />
+    <EntitySet Name="Footers" EntityType="Self.Footer" />
+    <EntitySet Name="HelpBuys" EntityType="Self.HelpBuy" />
+    <EntitySet Name="Menus" EntityType="Self.Menu" />
+    <EntitySet Name="MenuTypes" EntityType="Self.MenuType" />
+    <EntitySet Name="Notifications" EntityType="Self.Notification" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+    <EntitySet Name="Pays" EntityType="Self.Pay" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Posts" EntityType="Self.Post" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Seos" EntityType="Self.Seo" />
+    <EntitySet Name="Slides" EntityType="Self.Slide" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Themes" EntityType="Self.Theme" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Product_Category1" Association="Self.FK_Product_Category1">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_MenuType" Association="Self.FK_Menu_MenuType">
+      <End Role="MenuType" EntitySet="MenuTypes" />
+      <End Role="Menu" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Pay" Association="Self.FK_Order_Pay">
+      <End Role="Pay" EntitySet="Pays" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

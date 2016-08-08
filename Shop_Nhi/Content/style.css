@@ -1,11 +1,4 @@
-﻿/*
-  Template Name: Daily Shop
-  Author : MarkUps
-  Author URI: http://www.markups.io/
-  Version: 1.0
-  Tags: light, white, ecommerce, online store, multi page, custom-colors, Bootstrap,responsive, html5, css3, Sass, template, web template
-
-*/
+﻿
 
 /* Table of Content
 ==================================================
@@ -85,8 +78,8 @@ h2 {
 img {
   border: none;
 }
-.error{
-    display: none;
+#cusform label.error{
+    display: inline;
     float: right;
     font-size: 18px;
     line-height: 24px;
@@ -98,12 +91,7 @@ img {
     right:0px;
     color:#9b1a2e;
 }
-.error.show{
-    display:block;
-}
-.text-error{
-    border:solid 1px #cd2d2d;
-}
+
 .btn-warning{
     background-color:#ff871c;
     font-size:16px;
@@ -2427,6 +2415,9 @@ h3.detail-sp{
   height: 40px;
   padding: 10px;
   width: 100%;
+}
+#checkout .checkout-area .checkout-left .panel-group .aa-checkout-billaddress .aa-checkout-single-bill input.error {
+  border: 1px solid #cd2d2d; 
 }
 #checkout .checkout-area .checkout-left .panel-group .aa-checkout-billaddress .aa-checkout-single-bill textarea {
   border: 1px solid #ccc;
