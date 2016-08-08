@@ -95,6 +95,8 @@ img {
 .btn-warning{
     background-color:#ff871c;
     font-size:16px;
+    text-transform:uppercase;
+    font-weight:bold;
 }
 .woocommerce-breadcrumb {
     font-size: 16px;
@@ -1139,7 +1141,7 @@ img {
   transition: all 0.5s;
 }
 .aa-product-catg li figure .aa-add-card-btn {
-  background: #F351FF none repeat scroll 0 0;
+  background: #ff871c none repeat scroll 0 0;
   bottom: 0;
   color: #fff;
   font-size: 16px;
@@ -1161,7 +1163,7 @@ img {
   transform: scale(0);
 }
 .aa-product-catg li figure .aa-add-card-btn-ok {
-  background: #F351FF none repeat scroll 0 0;
+  background: #ff871c none repeat scroll 0 0;
   bottom: 0;
   color: #fff;
   font-size: 16px;
@@ -2052,14 +2054,14 @@ img {
 #aa-product-category .aa-product-catg-content .aa-product-catg-head .aa-product-catg-head-left .aa-sort-form select {
   border: 1px solid #ccc;
   text-align: left;
-  width: 150px;
+  width: 140px;
 }
 #aa-product-category .aa-product-catg-content .aa-product-catg-head .aa-product-catg-head-left .aa-sort-form select option {
   padding: 4px;
 }
 #aa-product-category .aa-product-catg-content .aa-product-catg-head .aa-product-catg-head-left .aa-show-form {
   float: left;
-  margin-left: 25px;
+  margin-left: 23px;
 }
 #aa-product-category .aa-product-catg-content .aa-product-catg-head .aa-product-catg-head-left .aa-show-form select {
   border: 1px solid #ccc;

@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Shop_Nhi</RootNamespace>
     <AssemblyName>Shop_Nhi</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -22,6 +22,8 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +43,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="CKFinder">
       <HintPath>C:\Users\Ms Trang\Desktop\ckfinder\bin\CKFinder.dll</HintPath>
     </Reference>
@@ -58,11 +61,11 @@
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\..\Shop_Nhi\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\..\Shop_Nhi\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -79,17 +82,17 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.DataVisualization.Design" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -98,7 +101,7 @@
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <HintPath>..\..\Shop_Nhi\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -112,9 +115,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -132,6 +133,7 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -206,81 +208,27 @@
     <Compile Include="Models\DAO\OrderDetailsDAO.cs" />
     <Compile Include="Models\DAO\ProductDAO.cs" />
     <Compile Include="Models\DAO\UserDAO.cs" />
-    <Compile Include="Models\Framework\About.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Category.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Contact.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\DBConnect.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBConnect.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\DBConnect.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\DBConnect.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBConnect.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Footer.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\HelpBuy.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Menu.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\MenuType.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Notification.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Order.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\OrderDetail.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Pay.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Payment.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Post.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Product.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Role.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Seo.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Slide.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\sysdiagram.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\Theme.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Framework\User.cs">
-      <DependentUpon>DBConnect.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Framework\About.cs" />
+    <Compile Include="Models\Framework\Category.cs" />
+    <Compile Include="Models\Framework\Contact.cs" />
+    <Compile Include="Models\Framework\DBConnect.cs" />
+    <Compile Include="Models\Framework\Footer.cs" />
+    <Compile Include="Models\Framework\HelpBuy.cs" />
+    <Compile Include="Models\Framework\Menu.cs" />
+    <Compile Include="Models\Framework\MenuType.cs" />
+    <Compile Include="Models\Framework\Notification.cs" />
+    <Compile Include="Models\Framework\Order.cs" />
+    <Compile Include="Models\Framework\OrderDetail.cs" />
+    <Compile Include="Models\Framework\Pay.cs" />
+    <Compile Include="Models\Framework\Payment.cs" />
+    <Compile Include="Models\Framework\Post.cs" />
+    <Compile Include="Models\Framework\Product.cs" />
+    <Compile Include="Models\Framework\Role.cs" />
+    <Compile Include="Models\Framework\Seo.cs" />
+    <Compile Include="Models\Framework\Slide.cs" />
+    <Compile Include="Models\Framework\sysdiagram.cs" />
+    <Compile Include="Models\Framework\Theme.cs" />
+    <Compile Include="Models\Framework\User.cs" />
     <Compile Include="Models\OrderValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -469,23 +417,6 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fonts\FontAwesome.otf" />
-    <EntityDeploy Include="Models\Framework\DBConnect.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBConnect.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Framework\DBConnect.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBConnect.edmx</DependentUpon>
-      <LastGenOutput>DBConnect.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Framework\DBConnect.edmx.diagram">
-      <DependentUpon>DBConnect.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Framework\DBConnect.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBConnect.edmx</DependentUpon>
-      <LastGenOutput>DBConnect.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\Admin\validator\validator.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\custom.js" />
@@ -1603,6 +1534,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Pn\Views\Users\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Accessibility1">
+      <Guid>{1EA4DBF0-3C3B-11CF-810C-00AA00389B71}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

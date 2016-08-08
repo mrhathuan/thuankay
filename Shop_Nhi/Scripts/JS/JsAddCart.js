@@ -154,7 +154,12 @@ $(document).ready(function () {
                                    ' </li>');
                     $('.aa-cart-notify').html(res.soluong);
                     $('.aa-cartbox-total-price').empty().append(addPeriod(res.tongtien));
-                    toastr.success('Thêm sản phẩm vào giỏ thành công', '');
+                    $('#btn-detail').empty().append('<a class="btn btn-warning"><span class="fa fa-refresh fa-pulse fa-1x fa-fw"></span> Thêm vào giỏ</a>')
+                    setTimeout(function () {
+                        $('#btn-detail').empty().append('<a class="btn btn-warning" href="/gio-hang"><span class="fa fa-check"></span> Xem giỏ hàng</a>');
+                        toastr.success('Thêm sản phẩm vào giỏ thành công', '');
+                    }, 1300);
+                   
                 },
                 error: function () {
                     alert(errormessage.responseText);

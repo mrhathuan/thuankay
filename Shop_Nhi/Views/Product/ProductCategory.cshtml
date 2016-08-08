@@ -18,6 +18,20 @@
 @section JsFooter{
     
 <script src="~/Scripts/JS/JsAddCart.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sort').change(function (e) {
+                e.preventDefaut();
+                var intSort = $(this).val();
+                var cateId = $('#cateId').val();
+                var strMethod = "@Url.Action("ProductCategory","Product")";
+                if (intSort == 2) {
+
+                }
+            })
+        });
+    </script>
 }
 
 
@@ -34,21 +48,17 @@
                     <div class="aa-product-catg-head">
                         <div class="aa-product-catg-head-left">
                             <form action="" class="aa-sort-form">
-                                <label for="">Sắp xếp theo</label>
-                                <select name="">
-                                    <option value="1" selected="Default">Thứ tự mặc định</option>
-                                    <option value="2">Thứ tự theo điểm yêu thích</option>
-                                    <option value="3">Thứ tự theo giá thấp đến cao</option>
-                                    <option value="4">Thứ tự theo sản phẩm mới</option>
+                                <label for="">Sắp xếp theo:</label>
+                                <input id="cateId" type="hidden" value="@category.ID" />
+                                <select id="sort" name="">
+                                    <option value="1" selected="Default">Sản phẩm mới</option>
+                                    <option value="2">Giá thấp đến cao</option>
+                                    <option value="3">Lượt xem</option>
+                                    <option value="5">Điểm yêu thích</option>                                    
                                 </select>
                             </form>
                             <form action="" class="aa-show-form">
-                                <label for="">Hiện</label>
-                                <select name="">
-                                    <option value="1" selected="12">12</option>
-                                    <option value="2">24</option>
-                                    <option value="3">36</option>
-                                </select>
+                                <label for="">Hiện có @Model.Count sản phẩm</label>                              
                             </form>
                         </div>
                         <div class="aa-product-catg-head-right">

@@ -34,7 +34,7 @@ namespace Shop_Nhi.Models.DAO
             return db.Products.Where(x => x.status == true).OrderByDescending(x => x.createDate).Take(top).ToList();
         }
 
-        //ProductCategory
+        //ProductCategory sort default
         public List<Product> ProductCategory(long cateId, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
         {
             var query = (from c in db.Categories where c.ID == cateId select c.ID).Union(
@@ -49,10 +49,57 @@ namespace Shop_Nhi.Models.DAO
             return listProduct.OrderByDescending(x => x.createDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
 
+        //product sort by price
+        public List<Product> SortByPrice(long cateId, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        {
+            var query = (from c in db.Categories where c.ID == cateId select c.ID).Union(
+                     from c1 in db.Categories
+                     join
+                         c2 in db.Categories on c1.parentID.Value equals c2.ID
+                     where c2.ID == cateId
+                     select c1.ID
+                 ).ToList();
+            var listProduct = from p in db.Products where (query.Contains(p.categoryID.Value) && p.status == true) select p;
+            totalRecord = listProduct.Count();
+            return listProduct.OrderBy(x => x.price).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        //product sort by price
+        public List<Product> SortByViewcount(long cateId, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        {
+            var query = (from c in db.Categories where c.ID == cateId select c.ID).Union(
+                     from c1 in db.Categories
+                     join
+                         c2 in db.Categories on c1.parentID.Value equals c2.ID
+                     where c2.ID == cateId
+                     select c1.ID
+                 ).ToList();
+            var listProduct = from p in db.Products where (query.Contains(p.categoryID.Value) && p.status == true) select p;
+            totalRecord = listProduct.Count();
+            return listProduct.OrderByDescending(x => x.viewCount).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        //product sort by like
+        public List<Product> SortByLike(long cateId, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        {
+            var query = (from c in db.Categories where c.ID == cateId select c.ID).Union(
+                     from c1 in db.Categories
+                     join
+                         c2 in db.Categories on c1.parentID.Value equals c2.ID
+                     where c2.ID == cateId
+                     select c1.ID
+                 ).ToList();
+            var listProduct = from p in db.Products where (query.Contains(p.categoryID.Value) && p.status == true) select p;
+            totalRecord = listProduct.Count();
+            return listProduct.OrderByDescending(x => x.like).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+
+
         //Search
         public List<Product> ListSearch(string keywords, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
         {
-            totalRecord = db.Products.Where(x => x.status == true && (x.code == keywords || x.productName == keywords)).Count();
+            totalRecord = db.Products.Where(x => x.status == true && (x.code == keywords || x.productName.Equals(keywords))).Count();
             return db.Products.Where(x => x.status == true && (x.code == keywords || x.productName == keywords)).OrderByDescending(x => x.createDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
 

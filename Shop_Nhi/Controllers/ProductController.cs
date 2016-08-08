@@ -17,7 +17,7 @@ namespace Shop_Nhi.Controllers
         }
 
         //ProductCategory
-        public ActionResult ProductCategory(long cateId, int page = 1, int pageSize = 50)
+        public ActionResult ProductCategory(long cateId, int page = 1, int pageSize = 24)
         {
             var dao = new ProductDAO();
             int totalRecord = 0;
@@ -41,6 +41,33 @@ namespace Shop_Nhi.Controllers
             ViewBag.Prev = page - 1;
             return View(model);
         }
+
+        //by price
+        public ActionResult SortByPrice(long cateId, int page = 1, int pageSize = 24)
+        {
+            var dao = new ProductDAO();
+            int totalRecord = 0;
+            var model = dao.SortByPrice(cateId, ref totalRecord, page, pageSize);
+            ViewBag.Total = totalRecord;
+            ViewBag.Page = page;
+
+            int maxPage = 5;
+            int totalPage = 0;
+
+            totalPage = (int)Math.Ceiling((double)((double)totalRecord / (double)pageSize));
+            ViewBag.TotalPage = totalPage;
+            ViewBag.MaxPage = maxPage;
+
+
+            ViewBag.Category = new CategoryDAO().GetByID(cateId);
+
+            ViewBag.First = 1;
+            ViewBag.Last = totalPage;
+            ViewBag.Next = page + 1;
+            ViewBag.Prev = page - 1;
+            return View(model);
+        }
+
 
         //ListAll
         public ActionResult ListAll(int page = 1, int pageSize = 50)

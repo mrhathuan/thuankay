@@ -29,7 +29,7 @@
                     pay: $('#pay').val(),
                 }
                 if ($.trim(data.pay) == 0) {
-                    toastr.error('Phương thức thanh toán không đúng', '');
+                    toastr.error('Phương thức thanh toán không hợp lệ', '');
                 } else {
                     $('#send-order').button('loading');
                     $.ajax({
@@ -46,7 +46,7 @@
                         },
                         success: function (res) {
                             if (res.status == true) {
-                                setTimeout(function () {                                    
+                                setTimeout(function () {
                                     location.href = '/gio-hang';
                                 }, 1200)
                                 toastr.success('Gửi đơn hàng thành công', '');
@@ -86,10 +86,11 @@
                         email: {
                             required: '<span class="fa fa-info-circle"></span>',
                             email: '<span class="fa fa-info-circle" data-toggle="tooltip" title="Địa chỉ email không hợp lệ"></span>'
-                        },                  
+                        },
                         phone: {
                             required: '<span class="fa fa-info-circle"></span>',
-                            minlength: '<span class="fa fa-info-circle" data-toggle="tooltip" title="Địa chỉ email không hợp lệ"></span>'
+                            minlength: '<span class="fa fa-info-circle" data-toggle="tooltip" title="Địa chỉ email không hợp lệ"></span>',
+                            number:'<span class="fa fa-info-circle" data-toggle="tooltip" title="Số điện thoại không hợp lệ"></span>'
                         }
                     }
                 })
