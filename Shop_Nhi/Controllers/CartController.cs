@@ -223,7 +223,7 @@ namespace Shop_Nhi.Controllers
         }
 
 
-        [HttpPost]
+
         public JsonResult SendOrder(string fullname, string address, string email, string phone,string message, int pay)
         {
             try
@@ -278,14 +278,14 @@ namespace Shop_Nhi.Controllers
                 Session["CartSession"] = null;  
               return Json(new{
                     status = true
-                }); 
+                },JsonRequestBehavior.AllowGet); 
             }
             catch
             {
                 return Json(new
                 {
                     status = false
-                });
+                },JsonRequestBehavior.AllowGet);
             }
             
             

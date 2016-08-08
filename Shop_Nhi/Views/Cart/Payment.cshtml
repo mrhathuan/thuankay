@@ -34,14 +34,22 @@
                     $('#send-order').button('loading');
                     $.ajax({
                         url: "/gui-don-hang",
-                        type: "POST",
+                        type: "GET",
                         dataType: "JSON",
+                        data:{
+                            fullname: data.fullname,
+                            address: data.address,
+                            email: data.email,
+                            phone: data.phone,
+                            message: data.message,
+                            pay:data.pay
+                        },
                         success: function (res) {
                             if (res.status == true) {
-                                setTimeout(function () {
-                                    toastr.success('Gửi đơn hàng thành công', '');
+                                setTimeout(function () {                                    
                                     location.href = '/gio-hang';
-                                },1300)
+                                }, 1200)
+                                toastr.success('Gửi đơn hàng thành công', '');
                             } else {
                                 toastr.warning('Lỗi thanh toán', '');
                                 location.href = '/thanh-toan-don-hang';
