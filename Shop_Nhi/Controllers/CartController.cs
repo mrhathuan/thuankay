@@ -223,7 +223,7 @@ namespace Shop_Nhi.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public JsonResult SendOrder(string fullname, string address, string email, string phone,string message, int pay)
         {
             try
@@ -278,7 +278,7 @@ namespace Shop_Nhi.Controllers
                 Session["CartSession"] = null;  
               return Json(new{
                     status = true
-                }) ; 
+                }); 
             }
             catch
             {
@@ -292,85 +292,7 @@ namespace Shop_Nhi.Controllers
         }
 
         #endregion payment
-
-        ////Đặt đơn hàng
-        //[HttpGet]
-        //public ActionResult Payment(string name, string phone, string email, string address, string cachnhanhang)
-        //{
-        //    try
-        //    {
-        //        var orderDao = new OrderDAO();
-        //        var orderDetailDao = new OrderDetailsDAO();
-        //        var productDao = new ProductDAO();
-        //        var cart = (List<CartItem>)Session["CartSession"];
-        //        decimal tongtien = 0;
-        //        foreach (var item in cart)
-        //        {
-        //            if (item.product.promotionPrice > 0)
-        //            {
-        //                tongtien += (item.product.promotionPrice.GetValueOrDefault(0) * item.quantity);
-        //            }
-        //            else
-        //            {
-        //                tongtien += (item.product.price.GetValueOrDefault(0) * item.quantity);
-        //            }
-        //        }
-        //        var order = new Order();
-        //        order.fullName = name;
-        //        order.phone = phone;
-        //        order.email = email;
-        //        order.address = address;
-        //        order.payID = Int32.Parse(cachnhanhang);
-        //        order.status = false;
-        //        order.dateSet = DateTime.Now;
-        //        order.totalAmount = tongtien;
-
-        //        var orderID = orderDao.Payment(order);
-
-        //        foreach (var item in cart)
-        //        {
-        //            var orderDetail = new OrderDetail();
-        //            decimal thanhtien = 0;
-        //            if (item.product.promotionPrice > 0)
-        //            {
-        //                thanhtien = item.quantity * item.product.promotionPrice.GetValueOrDefault(0);
-        //            }
-        //            else
-        //            {
-        //                thanhtien = item.quantity * item.product.price.GetValueOrDefault(0);
-        //            }
-        //            tongtien += item.product.price.GetValueOrDefault(0) * item.quantity;
-        //            orderDetail.orderID = orderID;
-        //            orderDetail.productID = item.product.ID;
-        //            orderDetail.productCode = item.product.code;
-        //            orderDetail.productName = item.product.productName;
-        //            orderDetail.quantity = item.quantity;
-        //            orderDetail.price = item.product.price;
-        //            orderDetail.totalAmount = (int)thanhtien;
-        //            orderDetailDao.AddOrderDetail(orderDetail);
-        //            productDao.SetViewcount(item.product);
-        //        }
-
-        //        string content = System.IO.File.ReadAllText(Server.MapPath("~/Common/neworder.html"));
-
-        //        content = content.Replace("{{CustomerName}}", name);
-        //        content = content.Replace("{{Phone}}", phone);
-        //        content = content.Replace("{{Email}}", email);
-        //        content = content.Replace("{{Address}}", address);
-        //        content = content.Replace("{{Total}}", tongtien.ToString("N0"));
-        //        var toEmail = "nhi.ntp165@gmail.com";
-        //        new Mail().SendMail(toEmail, "Đơn hàng mới từ shop", content);
-        //        new Mail().SendMail(email, "Đơn hàng mới từ shop", content);
-        //        Session["CartSession"] = null;
-        //        return Redirect("/mua-hang-thanh-cong");
-        //    }
-        //    catch
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //}
-
-        //Thành công
+     
         public ActionResult Success()
         {
             return View();

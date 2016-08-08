@@ -33,13 +33,13 @@
                 } else {
                     $('#send-order').button('loading');
                     $.ajax({
-                        url: '/gui-don-hang',
-                        type: 'GET',
-                        dataType: 'JSON',
+                        url: "/gui-don-hang",
+                        type: "POST",
+                        dataType: "JSON",
                         success: function (res) {
                             if (res.status == true) {
                                 setTimeout(function () {
-                                    toastr.warning('Gửi đơn hàng thành công', '');
+                                    toastr.success('Gửi đơn hàng thành công', '');
                                     location.href = '/gio-hang';
                                 },1300)
                             } else {
